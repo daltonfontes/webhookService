@@ -5,6 +5,10 @@
     <ProjectReference Include="..\WebhookService.Infrastructure\WebhookService.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="prometheus-net.AspNetCore" Version="8.2.1" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

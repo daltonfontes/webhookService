@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebhookService.Api.Configurations;
+using WebhookService.Application.Services;
 using WebhookService.Application.UseCases;
 using WebhookService.Domain.Interfaces;
 using WebhookService.Infrastructure.Context;
@@ -20,6 +21,7 @@ builder.Configuration.AddEnvironmentVariables();
 // Add services to the container.
 builder.Services.AddScoped<IWebhookRepository, WebhookRepository>();
 builder.Services.AddScoped<ProcessWebhookUseCase>();
+builder.Services.AddSingleton<MetricsService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
@@ -39,6 +41,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseRouting();
+app.ConfigureMetrics();
 
 app.MapControllers();
 
