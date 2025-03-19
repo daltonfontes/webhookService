@@ -1,7 +1,6 @@
 # 🚀 Webhook Service API
 
-A simple **Webhook Service API** built with **.NET**, **Docker**, **PostgreSQL**, and **Prometheus/Grafana** for monitoring. This project follows **Clean Architecture** principles and includes **unit tests** to ensure reliability.
-
+A simple **Webhook Service API** built with **.NET**, **Docker**, **PostgreSQL**, and **Prometheus/Grafana** for monitoring.
 
 ---
 
