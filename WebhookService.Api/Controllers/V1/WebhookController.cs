@@ -1,9 +1,13 @@
+using Asp.Versioning;
 using Microsoft.AspNetCore.Mvc;
+using WebhookService.Api.Dto;
+using WebhookService.Api.Helpers.Routes;
 using WebhookService.Application.UseCases;
 
 namespace WebhookService.Api.Controllers;
 
 [ApiController]
+[ApiVersion("1.0")]
 [Route("api/webhook")]
 public class WebhookController : ControllerBase
 {
@@ -14,7 +18,7 @@ public class WebhookController : ControllerBase
         _processWebhookUseCase = processWebhookUseCase;
     }
 
-    [HttpPost]
+    [HttpPost(ApiRoutes.Webhook.Post)]
     public async Task<IActionResult> Post([FromBody] WebhookEventDto webhookEventDto)
     {
         await _processWebhookUseCase.ExecuteAsync(webhookEventDto.Type, webhookEventDto.Payload);

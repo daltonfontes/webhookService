@@ -1,21 +1,28 @@
+using Microsoft.EntityFrameworkCore;
 using WebhookService.Domain.Entities;
 using WebhookService.Domain.Interfaces;
+using WebhookService.Infrastructure.Context;
 
 namespace WebhookService.Infrastructure.Repositories
 {
     public class InMemoryWebhookRepository : IWebhookRepository
     {
-        private readonly List<WebhookEvent> _webhookEvents = new List<WebhookEvent>();
+        private readonly DataContext _dbContext;
 
-        public Task SaveAsync(WebhookEvent webhookEvent)
+        public InMemoryWebhookRepository(DataContext dbContext)
         {
-            _webhookEvents.Add(webhookEvent);
-            return Task.CompletedTask;
+            _dbContext = dbContext;
         }
 
-        public Task<List<WebhookEvent>> GetAsync()
+        public async Task SaveAsync(WebhookEvent webhookEvent)
         {
-            return Task.FromResult(_webhookEvents.ToList());
+            await _dbContext.WebhookEvents.AddAsync(webhookEvent);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task<List<WebhookEvent>> GetAsync()
+        {
+            return await _dbContext.WebhookEvents.ToListAsync();
         }
     }
 }
