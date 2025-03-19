@@ -10,39 +10,39 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: alpine-latest
 
     steps:
-      - name: Checkout código
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Configurar .NET
+      - name: Config .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restaurar dependências
+      - name: Restore dependencies
         run: dotnet restore
 
-      - name: Compilar
+      - name: Compile
         run: dotnet build --no-restore --configuration Release
 
-      - name: Rodar Testes
+      - name: run Tests
         run: dotnet test --no-build --configuration Release --verbosity normal
 
   docker:
     needs: build-and-test
-    runs-on: ubuntu-latest
+    runs-on: alpine-latest
 
     steps:
-      - name: Checkout código
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Login no Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t webhook-service .
+        run: docker build -t webhook-service -f WebhookService.Api/Dockerfile WebhookService.Api/
 
       - name: Push Docker Image
         run: docker tag webhook-service mydockerhub/webhook-service:latest && docker push mydockerhub/webhook-service:latest
