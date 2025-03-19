@@ -44,5 +44,8 @@ jobs:
       - name: Build Docker Image
         run: docker build -t webhook-service -f WebhookService.Api/Dockerfile WebhookService.Api/
 
+      - name: Tag Docker Image
+        run: docker tag webhook-service ${{ secrets.DOCKER_USERNAME }}/webhook-service:latest
+
       - name: Push Docker Image
-        run: docker tag webhook-service mydockerhub/webhook-service:latest && docker push mydockerhub/webhook-service:latest
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/webhook-service:latest
