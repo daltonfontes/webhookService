@@ -1,5 +1,6 @@
 using WebhookService.Domain.Entities;
 using WebhookService.Domain.Interfaces;
+using WebhookService.Domain.Responses;
 
 namespace WebhookService.Application.UseCases
 {

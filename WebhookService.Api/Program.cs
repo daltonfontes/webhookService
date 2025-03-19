@@ -18,7 +18,7 @@ builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(connecti
 builder.Configuration.AddEnvironmentVariables();
 
 // Add services to the container.
-builder.Services.AddScoped<IWebhookRepository, InMemoryWebhookRepository>();
+builder.Services.AddScoped<IWebhookRepository, WebhookRepository>();
 builder.Services.AddScoped<ProcessWebhookUseCase>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

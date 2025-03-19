@@ -5,11 +5,11 @@ using WebhookService.Infrastructure.Context;
 
 namespace WebhookService.Infrastructure.Repositories
 {
-    public class InMemoryWebhookRepository : IWebhookRepository
+    public class WebhookRepository : IWebhookRepository
     {
         private readonly DataContext _dbContext;
 
-        public InMemoryWebhookRepository(DataContext dbContext)
+        public WebhookRepository(DataContext dbContext)
         {
             _dbContext = dbContext;
         }

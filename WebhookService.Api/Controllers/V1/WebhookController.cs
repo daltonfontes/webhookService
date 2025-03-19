@@ -8,7 +8,6 @@ namespace WebhookService.Api.Controllers;
 
 [ApiController]
 [ApiVersion("1.0")]
-[Route("api/webhook")]
 public class WebhookController : ControllerBase
 {
     private readonly ProcessWebhookUseCase _processWebhookUseCase;
@@ -22,6 +21,6 @@ public class WebhookController : ControllerBase
     public async Task<IActionResult> Post([FromBody] WebhookEventDto webhookEventDto)
     {
         await _processWebhookUseCase.ExecuteAsync(webhookEventDto.Type, webhookEventDto.Payload);
-        return Ok();
+        return Ok(new { status = "Ok", success = true });
     }
 }

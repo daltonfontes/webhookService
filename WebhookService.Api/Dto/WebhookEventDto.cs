@@ -1,5 +1,3 @@
-using System;
-
 namespace WebhookService.Api.Dto;
 
 public class WebhookEventDto
